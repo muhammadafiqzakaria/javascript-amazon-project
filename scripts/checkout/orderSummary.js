@@ -4,13 +4,7 @@ import { formatCurrency } from '../utils/money.js'; //single dot means the curre
 import {hello} from 'http://unpkg.com/supersimpledev@1.0.1/hello.esm.js';
 import dayjs from 'https://unpkg.com/supersimpledev@8.5.0/dayjs/esm/index.js'; //default export when only want to export one thing from the file
 import {deliveryOptions, getDeliveryOption} from '../../data/deliveryOptions.js';
-
-hello();
-
-//use dayjs() library
-const today = dayjs();
-const deliveryDate = today.add(7, 'days');
-console.log(deliveryDate.format('dddd, MMMM D'));
+import { renderPaymentSummary } from './paymentSummary.js';
 
 export function renderOrderSummary() {
 
@@ -131,6 +125,8 @@ export function renderOrderSummary() {
         );
 
         container.remove();
+
+        renderPaymentSummary();
       });
   });
 
@@ -140,6 +136,7 @@ export function renderOrderSummary() {
         const {productId, deliveryOptionId} = element.dataset;
         updateDeliveryOption(productId, deliveryOptionId);
         renderOrderSummary();
+        renderPaymentSummary();
       });
     });
 }
