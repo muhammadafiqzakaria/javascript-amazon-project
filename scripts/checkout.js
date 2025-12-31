@@ -5,6 +5,21 @@ import {renderPaymentSummary} from "./checkout/paymentSummary.js";
 import { loadProducts, loadProductsFetch } from "../data/products.js";
 import { loadCart } from "../data/cart.js";
 
+async function loadPage() { //async = makes a function return a promise
+  await loadProductsFetch(); //wait for promise to finish
+
+  const value = await new Promise((resolve) => {
+    loadCart(() => {
+      resolve('value3');
+    });
+  })
+
+  renderOrderSummary();
+  renderPaymentSummary();
+}
+loadPage()
+
+/*
 Promise.all([
   loadProductsFetch(),
   new Promise((resolve) => {
@@ -17,6 +32,7 @@ Promise.all([
   renderOrderSummary();
   renderPaymentSummary();
 });
+*/
 
 /*
 //promise is the same thing as callback
