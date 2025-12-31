@@ -1,16 +1,16 @@
 class Cart {
   cartItems; //property
-  localStorageKey; //Property
+  #localStorageKey; //Property //This property is private (meaning only accessible for this class)
   
   // constructor lets us put this setup code inside the class
   // we generate the object, it run the constructor automatically
   constructor(localStorageKey) {
     this.localStorageKey = localStorageKey;
-    this.loadFromStorage(); //this point to the object we generate
+    this.#loadFromStorage(); //this point to the object we generate
   } //method has to be named 'constructor' //should not return anything in constructor
 
-  loadFromStorage() {
-    this.cartItems = JSON.parse(localStorage.getItem(this.localStorageKey));
+  #loadFromStorage() { //this method is private
+    this.cartItems = JSON.parse(localStorage.getItem(this.#localStorageKey));
 
     if (!this.cartItems) {
       this.cartItems = [{
@@ -26,7 +26,7 @@ class Cart {
   }
 
   saveToStorage() {
-    localStorage.setItem(this.localStorageKey, JSON.stringify(this.cart.cartItems));
+    localStorage.setItem(this.#localStorageKey, JSON.stringify(this.cart.cartItems));
   }
 
   addToCart(productId) {
