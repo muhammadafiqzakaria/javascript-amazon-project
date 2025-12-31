@@ -34,6 +34,10 @@ class Product {
   getPrice() {
     return `$${formatCurrency(this.priceCents)}`;
   }
+
+  extraInfoHTML() {
+    return '';
+  }
 }
 
 const product1 = new Product({
@@ -51,6 +55,24 @@ const product1 = new Product({
       "apparel"
     ]
   });
+
+class Clothing extends Product{ //this is child class that use inheritance from the Product class
+  sizeChartLink;
+
+  constructor(productDetails) {
+    super(productDetails); //super call the instructor of the parent class
+    this.sizeChartLink = productDetails.sizeChartLink;
+  }
+
+  extraInfoHTML() { //override/replace the parent's method
+    //super.extraInfoHTML();
+    return `
+    <a href="${this.sizeChartLink}" target="_blank">
+    Size chart
+    </a>
+    `;
+  }
+}
 
 export const products = [
   {
@@ -712,5 +734,8 @@ export const products = [
     ]
   }
 ].map((productDetails) => {
+  if (productDetails.type === 'clothing') {
+    return new Clothing(productDetails);
+  }
   return new Product(productDetails);
 }); //map loops thru the array and for each value it run a function
