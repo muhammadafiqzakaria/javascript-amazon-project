@@ -73,6 +73,36 @@ class Clothing extends Product{ //this is child class that use inheritance from 
     `;
   }
 }
+/*
+const date = new Date();
+console.log(date);
+console.log(date.toLocaleTimeString());
+*/
+
+/*
+console.log(this);
+
+const object2 = {
+  a: 2,
+  b: this.a
+};
+*/
+
+/*
+function logThis() {
+  console.log(this);
+}
+
+logThis();
+logThis.call('hello'); //we can change this to whatever we want using .call
+
+const object3 = {
+  method: () => {
+    console.log(this);
+  }
+};
+object3.method();
+*/
 
 export const products = [
   {
